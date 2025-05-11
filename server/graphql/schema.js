@@ -22,6 +22,11 @@ const typeDefs = gql`
     status: String!
   }
 
+  type AuthPayload {
+    token: String!
+    user: User!
+  }
+
   type Query {
     users: [User]
     user(id: ID!): User
@@ -32,7 +37,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(name: String!, email: String!): User
+    createUser(name: String!, email: String!, password: String!): AuthPayload
+    login(email: String!, password: String!): AuthPayload
     createJob(title: String!, company: String!): Job
     applyForJob(userId: ID!, jobId: ID!): Application
     updateApplicationStatus(id: ID!, status: String!): Application

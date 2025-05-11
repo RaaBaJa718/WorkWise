@@ -1,6 +1,6 @@
 const User = require('../models/User');
-const Job = require('../models/Job');
-const Application = require('../models/Application');
+const Job = require('../models/Jobs');
+const Application = require('../models/Applications');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
 
@@ -10,8 +10,8 @@ const resolvers = {
         user: async (_, { id }) => await User.findById(id),
         jobs: async () => await Job.find(),
         job: async (_, { id }) => await Job.findById(id),
-        applications: async () => await Application.find(),
-        application: async (_, { id }) => await Application.findById(id),
+        applications: async () => await Application.find().populate('user').populate('job'),
+        application: async (_, { id }) => await Application.findById(id).populate('user').populate('job'),
     },
     
     Mutation: {
@@ -36,8 +36,8 @@ const resolvers = {
             return { token, user };
         },
 
-        createJob: async (_, { title, company }) => {
-            const job = await Job.create({ title, company });
+        createJob: async (_, { title, company, description }) => {
+            const job = await Job.create({ title, company, description });
             return job;
         },
 

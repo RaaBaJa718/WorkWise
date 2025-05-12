@@ -1,15 +1,12 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import React from "react";
+import { AuthProvider } from "./context/AuthContext"; // Adjust the path if necessary
+import Login from "./pages/Login"; // Adjusted path
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Login />
+    </AuthProvider>
   );
 }
 

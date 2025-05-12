@@ -29,10 +29,11 @@ const resolvers = {
             const existingUser = await User.findOne({ email });
             if (existingUser) throw new Error("User with this email already exists");
 
-            // Hash the password before storing
-            const hashedPassword = await bcrypt.hash(password, 10);
-            const user = await User.create({ name, email, password: hashedPassword });
+            console.log("🔐 Hashing password before storing...");
+            const hashedPassword = await bcrypt.hash(password, 10); // ✅ Always hash before storing
+            console.log("🔐 Hashed Password:", hashedPassword);
 
+            const user = await User.create({ name, email, password: hashedPassword });
             const token = signToken(user);
             return { token, user };
         },
@@ -46,9 +47,11 @@ const resolvers = {
             }
 
             console.log("🔎 Stored Hashed Password:", user.password);
+            console.log("🔍 Attempting bcrypt.compare() with input password:", password);
 
+            // Extra validation to ensure password hashing is correct
             const isValid = await bcrypt.compare(password, user.password);
-            console.log("🔍 Comparing:", password, "with stored hash.");
+            console.log("🛠 Bcrypt comparison result:", isValid);
 
             if (!isValid) {
                 console.error("❌ Password mismatch for user:", user.email);

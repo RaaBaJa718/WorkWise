@@ -3,6 +3,26 @@ const { ApolloServer } = require("apollo-server-express");
 const path = require("path");
 require("dotenv").config();
 
+const mongoose = require("mongoose");
+
+async function testDB() {
+  try {
+    console.log("⏳ Connecting to MongoDB...");
+    await mongoose.connect("mongodb://localhost:27017/workwise", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log("✅ Successfully Connected to MongoDB!");
+    const users = await mongoose.connection.db.collection("users").find().toArray();
+    console.log("✅ Retrieved Users:", users);
+  } catch (error) {
+    console.error("❌ Connection Failed:", error);
+  }
+}
+
+testDB();
+
 const typeDefs = require("./graphql/schema"); // Import GraphQL schema
 const resolvers = require("./graphql/resolvers"); // Import resolvers
 

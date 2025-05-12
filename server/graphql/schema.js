@@ -13,7 +13,9 @@ const typeDefs = gql`
     title: String!
     company: String!
     applications: [Application]
-  }
+    description: String
+    postedDate: String
+}
 
   type Application {
     id: ID!

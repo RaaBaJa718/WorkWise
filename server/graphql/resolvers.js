@@ -29,18 +29,34 @@ const resolvers = {
             const existingUser = await User.findOne({ email });
             if (existingUser) throw new Error("User with this email already exists");
 
-            const user = await User.create({ name, email, password });
+            // Hash the password before storing
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const user = await User.create({ name, email, password: hashedPassword });
+
             const token = signToken(user);
             return { token, user };
         },
 
         login: async (_, { email, password }) => {
             const user = await User.findOne({ email });
-            if (!user || !(await bcrypt.compare(password, user.password))) {
+
+            if (!user) {
+                console.error("❌ User not found for email:", email);
+                throw new Error("Invalid credentials");
+            }
+
+            console.log("🔎 Stored Hashed Password:", user.password);
+
+            const isValid = await bcrypt.compare(password, user.password);
+            console.log("🔍 Comparing:", password, "with stored hash.");
+
+            if (!isValid) {
+                console.error("❌ Password mismatch for user:", user.email);
                 throw new Error("Invalid credentials");
             }
 
             const token = signToken(user);
+            console.log("✅ Login successful for:", user.email);
             return { token, user };
         },
 

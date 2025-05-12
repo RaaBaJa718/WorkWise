@@ -22,6 +22,7 @@ const typeDefs = gql`
     job: Job!
     user: User!
     status: String!
+    appliedDate: String!
   }
 
   type AuthPayload {

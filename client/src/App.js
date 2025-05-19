@@ -1,9 +1,10 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import JobListings from "./pages/JobListings";
+import JobApplication from "./pages/JobApplication";  // ✅ Import the component
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route index element={<Dashboard />} />
           </Route>
+          <Route path="/jobs" element={<JobListings />} />
+          <Route path="/apply" element={<JobApplication />} />
         </Routes>
       </Router>
     </AuthProvider>

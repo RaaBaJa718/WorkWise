@@ -8,17 +8,18 @@ export const AuthProvider = ({ children }) => {
 
   // ✅ Restore user session from localStorage on app load
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      try {
-        const decodedUser = jwtDecode(token);
-        setUser(decodedUser);
-      } catch (error) {
-        console.error("Invalid token", error);
-        localStorage.removeItem("token");
-      }
+  const token = localStorage.getItem("token");
+  if (token) {
+    try {
+      const decodedUser = jwtDecode(token);
+      console.log("🔎 Decoded User Object:", decodedUser);  // ✅ Add this log
+      setUser(decodedUser);
+    } catch (error) {
+      console.error("Invalid token", error);
+      localStorage.removeItem("token");
     }
-  }, []);
+  }
+}, []);
 
   const login = (token) => {
     localStorage.setItem("token", token);

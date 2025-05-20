@@ -5,39 +5,48 @@ import { Link } from "react-router-dom";
 const JobListings = () => {
   const [jobs, setJobs] = useState([]);
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/graphql", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            query: `
-              query {
-                jobs {
-                  _id  // ✅ Ensure we fetch the actual ID from the database
-                  title
-                  company
-                  description
-                  postedDate
-                  location
-                  salary
-                }
+ useEffect(() => {
+  const fetchJobs = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/graphql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: `
+            query {
+              jobs {
+                id
+                title
+                company
+                description
+                postedDate
               }
-            `,
-          }),
-        });
+            }
+          `,
+        }),
+      });
 
-        const data = await response.json();
-        console.log("✅ Fetched Jobs:", data.data.jobs); // Debug log
-        setJobs(data.data.jobListings); // ✅ Stores actual job IDs
-      } catch (error) {
-        console.error("❌ Error fetching jobs:", error);
+      const data = await response.json();
+      console.log("🔎 Full API Response:", data); // ✅ Debug log
+
+      // 🚨 Log errors from GraphQL response
+      if (data.errors) {
+        console.error("❌ GraphQL Error:", data.errors); // Debug actual errors
+        throw new Error("GraphQL query failed!");
       }
-    };
 
-    fetchJobs();
-  }, []);
+      if (!data.data || !data.data.jobs) {
+        throw new Error("❌ API response is empty or incorrectly structured!");
+      }
+
+      setJobs(data.data.jobs);
+    } catch (error) {
+      console.error("❌ Error fetching jobs:", error);
+    }
+  };
+
+  fetchJobs();
+}, []);
 
   return (
     <div className="job-listings-container">

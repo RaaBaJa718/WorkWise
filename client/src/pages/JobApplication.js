@@ -18,57 +18,54 @@ const JobApplication = () => {
     setResume(e.target.files[0]);  // ✅ Store selected file
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!resume || !coverLetter || !availability || !name || !jobId) {
-    alert("Error: Missing required fields.");
-    return;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!resume || !coverLetter || !availability || !name || !jobId) {
+      alert("❌ Error: Missing required fields.");
+      return;
+    }
 
-  // ✅ Debugging log before sending request
-  console.log("Submitting application with User ID:", user?.id);
-  console.log("Submitting application with Job ID:", jobId);
-  console.log("GraphQL Mutation Payload:", JSON.stringify({
-    query: `
-      mutation ApplyForJob($userId: ID!, $jobId: ID!) {
-        applyForJob(userId: $userId, jobId: $jobId) {
-          id
-          status
-          appliedDate
-        }
-      }
-    `,
-    variables: {
-      userId: user?.id,  // ✅ Ensure this matches the working test
-      jobId: jobId,  // ✅ Ensure this matches the working test
-    },
-  }));
+    // ✅ Debugging logs BEFORE sending the request
+    console.log("🔎 User ID being sent:", user?._id);
+    console.log("📌 Job ID being sent:", jobId);
 
-  try {
-    const response = await fetch("http://localhost:5000/graphql", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `
-          mutation ApplyForJob($userId: ID!, $jobId: ID!) {
-            applyForJob(userId: $userId, jobId: $jobId) {
-              id
-              status
-              appliedDate
+    try {
+      const response = await fetch("http://localhost:5000/graphql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: `
+            mutation ApplyForJob($userId: ID!, $jobId: ID!) {
+              applyForJob(userId: $userId, jobId: $jobId) {
+                id
+                status
+                appliedDate
+              }
             }
-          }
-        `,
-        variables: { userId: user?.id, jobId },
-      }),
-    });
+          `,
+          variables: {
+            userId: user?._id,  // ✅ Ensure `_id` is used, not `user.id`
+            jobId: jobId,  // ✅ Ensure `jobId` is correct from JobListings.js
+          },
+        }),
+      });
 
-    const data = await response.json();
-    alert(`Application submitted! Status: ${data.data.applyForJob.status}`);
-  } catch (error) {
-    console.error("Error submitting application:", error);
-    alert("Failed to submit application.");
-  }
-};
+      const data = await response.json();
+      console.log("✅ GraphQL Response:", data);  // ✅ Debugging log
+
+      // 🚨 Fix: Prevent error if mutation returns `null`
+      if (!data.data || !data.data.applyForJob) {
+        throw new Error("❌ Mutation returned null—check backend logs!");
+      }
+
+      alert(`🎉 Application submitted successfully! Status: ${data.data.applyForJob.status}`);
+    } catch (error) {
+      console.error("❌ Error submitting application:", error);
+      alert("⚠ Failed to submit application. Please try again.");
+    }
+  };
+
   return (
     <div className="job-application-container">
       <h2>Apply for a Job</h2>

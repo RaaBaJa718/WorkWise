@@ -15,7 +15,9 @@ const typeDefs = gql`
     applications: [Application]
     description: String
     postedDate: String
-}
+    location: String
+    salary: String
+  }
 
   type Application {
     id: ID!
@@ -42,7 +44,7 @@ const typeDefs = gql`
   type Mutation {
     createUser(name: String!, email: String!, password: String!): AuthPayload
     login(email: String!, password: String!): AuthPayload
-    createJob(title: String!, company: String!, description: String!): Job
+    createJob(title: String!, company: String!, description: String!, location: String, salary: String): Job
     applyForJob(userId: ID!, jobId: ID!): Application
     updateApplicationStatus(id: ID!, status: String!): Application
   }

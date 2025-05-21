@@ -1,63 +1,74 @@
 import React, { useState, useEffect } from "react";
-import "../styles/JobListings.css"; // ✅ Import styles
+import "../styles/JobListings.css";
 import { Link } from "react-router-dom";
 
 const JobListings = () => {
   const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
- useEffect(() => {
-  const fetchJobs = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/graphql", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          query: `
-            query {
-              jobs {
-                id
-                title
-                company
-                description
-                postedDate
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/graphql", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: `
+              query {
+                jobs {
+                  id
+                  title
+                  company
+                  description
+                  postedDate
+                  location
+                  salary
+                }
               }
-            }
-          `,
-        }),
-      });
+            `,
+          }),
+        });
 
-      const data = await response.json();
-      console.log("🔎 Full API Response:", data); // ✅ Debug log
+        const data = await response.json();
+        console.log("🔎 Full API Response:", data);
 
-      // 🚨 Log errors from GraphQL response
-      if (data.errors) {
-        console.error("❌ GraphQL Error:", data.errors); // Debug actual errors
-        throw new Error("GraphQL query failed!");
+        if (data.errors) {
+          console.error("❌ GraphQL Error:", data.errors);
+          throw new Error("Failed to fetch job listings!");
+        }
+
+        if (!data.data || !data.data.jobs) {
+          throw new Error("❌ API response is empty or incorrectly structured!");
+        }
+
+        setJobs(data.data.jobs);
+      } catch (error) {
+        console.error("❌ Error fetching jobs:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
+    };
 
-      if (!data.data || !data.data.jobs) {
-        throw new Error("❌ API response is empty or incorrectly structured!");
-      }
-
-      setJobs(data.data.jobs);
-    } catch (error) {
-      console.error("❌ Error fetching jobs:", error);
-    }
-  };
-
-  fetchJobs();
-}, []);
+    fetchJobs();
+  }, []);
 
   return (
     <div className="job-listings-container">
       <h2>Available Jobs</h2>
+
+      {loading && <p>⏳ Loading job listings...</p>}
+      {error && <p className="error">❌ {error}</p>}
+
       <ul>
         {jobs.map((job) => (
-          <li key={job.id} className="job-card">  {/* ✅ Using _id instead of hardcoded IDs */}
+          <li key={job.id || job._id} className="job-card">
             <h3>{job.title}</h3>
-            <p>📍 {job.location} | 💰 {job.salary}</p>
-            <button>View Details</button>
-            <Link to={`/apply?jobId=${job.id}`}>Apply Now</Link>  {/* ✅ Pass the real job ID */}
+            <p>
+              📍 {job.location ?? "Location not specified"} | 💰 {job.salary ?? "Salary not listed"}
+            </p>
+            <Link to={`/apply?jobId=${job.id || job._id}`}>Apply Now</Link>
           </li>
         ))}
       </ul>

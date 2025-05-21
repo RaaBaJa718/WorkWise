@@ -5,6 +5,8 @@ const jobSchema = new mongoose.Schema({
     company: { type: String, required: true },
     description: { type: String, required: true },
     postedDate: { type: Date, default: Date.now },
+    location: { type: String },
+    salary: { type: String },
 });
 
 const Job = mongoose.model('Job', jobSchema);

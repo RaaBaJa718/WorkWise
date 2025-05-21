@@ -4,7 +4,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import JobListings from "./pages/JobListings";
-import JobApplication from "./pages/JobApplication";  // ✅ Import the component
+import JobApplication from "./pages/JobApplication";
+import "./App.css";
 
 function App() {
   return (

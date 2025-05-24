@@ -80,6 +80,18 @@ const resolvers = {
             if (!ObjectId.isValid(id)) throw new Error("Invalid Application ID format.");
             return await Application.findByIdAndUpdate(new ObjectId(id), { status }, { new: true });
         },
+
+        registerUser: async (_, { email, password }) => {
+            const existingUser = await User.findOne({ email });
+            if (existingUser) throw new Error("User already exists");
+
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const newUser = new User({ email, password: hashedPassword });
+            await newUser.save();
+
+            const token = signToken(newUser);
+            return { token, user: newUser };
+        },
     },
 };
 

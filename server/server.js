@@ -9,7 +9,6 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
-      // Remove useNewUrlParser and useUnifiedTopology if using MongoDB v4+
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -22,8 +21,8 @@ const connectDB = async () => {
 
 connectDB();
 
-const typeDefs = require("./graphql/schema"); // Import GraphQL schema
-const resolvers = require("./graphql/resolvers"); // Import resolvers
+const typeDefs = require("./graphql/schema");
+const resolvers = require("./graphql/resolvers");
 
 const app = express();
 app.use(express.json());
@@ -37,7 +36,7 @@ async function startServer() {
   await server.start();
   server.applyMiddleware({ app });
 
-  const PORT = process.env.PORT || 5000;
+  const PORT = process.env.PORT || 10000; // ✅ Uses Render's assigned port
   app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`⚡ GraphQL API available at http://localhost:${PORT}${server.graphqlPath}`);

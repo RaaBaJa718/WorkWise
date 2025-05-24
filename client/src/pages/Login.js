@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../graphql/mutations";
 import AuthContext from "../context/AuthContext";
@@ -67,6 +67,9 @@ const Login = () => {
           </div>
           <button type="submit">Login</button>
         </form>
+        <p>
+          Don't have an account? <Link to="/register">Sign Up</Link>
+        </p>
       </div>
 
       {/* Right Side - Animated Design */}

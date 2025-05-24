@@ -4,26 +4,23 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "../.env" });
 
-
 const mongoose = require("mongoose");
 
-async function testDB() {
+const connectDB = async () => {
   try {
-    console.log("⏳ Connecting to MongoDB...");
-    await mongoose.connect("mongodb://localhost:27017/workwise", {
+    await mongoose.connect(process.env.MONGO_URI, {
+      // Remove useNewUrlParser and useUnifiedTopology if using MongoDB v4+
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-
-    console.log("✅ Successfully Connected to MongoDB!");
-    const users = await mongoose.connection.db.collection("users").find().toArray();
-    console.log("✅ Retrieved Users:", users);
+    console.log("✅ MongoDB Connected Successfully!");
   } catch (error) {
-    console.error("❌ Connection Failed:", error);
+    console.error("❌ MongoDB Connection Error:", error);
+    process.exit(1);
   }
-}
+};
 
-testDB();
+connectDB();
 
 const typeDefs = require("./graphql/schema"); // Import GraphQL schema
 const resolvers = require("./graphql/resolvers"); // Import resolvers

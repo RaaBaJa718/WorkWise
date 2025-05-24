@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const connectDB = async () => {
   try {
@@ -24,6 +25,14 @@ const resolvers = require("./graphql/resolvers");
 const app = express();
 app.use(express.json());
 
+// Allow requests from your frontend domain
+app.use(
+  cors({
+    origin: "https://workwise-1-3yv0.onrender.com", // <-- your frontend URL
+    credentials: true,
+  })
+);
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -38,7 +47,9 @@ async function startServer() {
   const PORT = process.env.PORT || 10000;
   app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
-    console.log(`⚡ GraphQL API available at https://workwise-4arc.onrender.com${server.graphqlPath}`);
+    console.log(
+      `⚡ GraphQL API available at https://workwise-4arc.onrender.com${server.graphqlPath}`
+    );
   });
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
-import "./Register.css";
+import "../styles/Register.css";
 
 const REGISTER_USER = gql`
   mutation RegisterUser($email: String!, $password: String!) {

@@ -7,7 +7,7 @@ const REGISTER_USER = gql`
     registerUser(email: $email, password: $password) {
       token
       user {
-        _id
+        id
         email
       }
     }

@@ -21,18 +21,18 @@
 .signup-container input,
 .signup-container button {
   max-width: 300px;
+  width: 100%;
+  display: block;
+  margin: 10px 0;
 }
 
-input {
-  width: 100%;
+.signup-container input {
   padding: 10px;
-  margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 5px;
 }
 
-button {
-  width: 100%;
+.signup-container button {
   padding: 12px;
   background-color: #007bff;
   color: white;
@@ -43,7 +43,7 @@ button {
   transition: 0.3s;
 }
 
-button:hover {
+.signup-container button:hover {
   background-color: #0056b3;
 }
 

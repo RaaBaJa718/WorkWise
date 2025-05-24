@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:10000/graphql',  // Ensure this matches your backend URL
+  uri: "https://workwise-4arc.onrender.com/graphql", // ✅ Use live backend
   cache: new InMemoryCache(),
 });
 

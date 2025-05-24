@@ -93,6 +93,9 @@ const resolvers = {
             return { token, user: newUser };
         },
     },
+    Job: {
+        id: (job) => job._id.toString(),
+    },
 };
 
 module.exports = resolvers;

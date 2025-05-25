@@ -35,7 +35,6 @@ const Dashboard = () => {
           <ul>
             <li><FaHome /> <a href="/dashboard">Dashboard</a></li>
             <li><FaBriefcase /> <a href="/jobs">Job Listings</a></li>
-            <li><FaProjectDiagram /> <a href="/projects">Projects</a></li>
             <li><FaUser /> <a href="/profile">Profile</a></li>
           </ul>
         </nav>

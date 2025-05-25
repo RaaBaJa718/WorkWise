@@ -5,7 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import JobListings from "./pages/JobListings";
 import JobApplication from "./pages/JobApplication";
-import Register from "./pages/Register"; // <-- Add this import
+import Register from "./pages/Register";
+import LandingPage from "./pages/LandingPage"; // <-- Add this import
 import "./App.css";
 
 function App() {
@@ -13,9 +14,9 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/" element={<LandingPage />} /> {/* Add this route */}
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} /> {/* Add this route */}
+          <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route index element={<Dashboard />} />
           </Route>

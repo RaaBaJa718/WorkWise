@@ -1,43 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { gql, useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
+import "../styles/LandingPage.css";
+
+const GET_JOBS = gql`
+  query GetJobs {
+    jobs {
+      id
+      title
+      company
+      location
+    }
+  }
+`;
 
 function LandingPage() {
-  const [jobs, setJobs] = useState([]);
+  const { loading, error, data } = useQuery(GET_JOBS);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("https://workwise-4arc.onrender.com/graphql", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `
-          query {
-            jobs {
-              id
-              title
-              company
-            }
-          }
-        `,
-      }),
-    })
-      .then(response => response.json())
-      .then(result => setJobs(result.data.jobs || []));
-  }, []);
+  if (loading) return <p>Loading jobs...</p>;
+  if (error) return <p>Error fetching jobs</p>;
 
   return (
-    <div>
-      <h1>Welcome to Work Wise 🚀</h1>
-      <p>Search for jobs, explore careers, and take the next step!</p>
-      <input type="text" placeholder="Search jobs..." />
-      <button>Search</button>
-      
-      <h2>Featured Jobs</h2>
-      <ul>
-        {jobs.map(job => (
-          <li key={job.id}>{job.title} - {job.company}</li>
-        ))}
-      </ul>
+    <div className="landing-container">
+      <h1 className="landing-title">Welcome to Work Wise 🚀</h1>
+      <p>Find your next career opportunity!</p>
 
-      <p>Sign in to apply or save jobs!</p>
+      <h2>Featured Jobs</h2>
+      <div className="jobs-list">
+        {data.jobs.map(job => (
+          <div key={job.id} className="job-card">
+            <h3>{job.title}</h3>
+            <p>{job.company} - {job.location}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Button to navigate to login page */}
+      <button className="login-button" onClick={() => navigate("/login")}>
+        Sign In / Register
+      </button>
     </div>
   );
 }

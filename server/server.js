@@ -19,6 +19,10 @@ const connectDB = async () => {
 
 connectDB();
 
+mongoose.connection.on("connected", () => {
+  console.log("Connected to MongoDB:", mongoose.connection.db.databaseName);
+});
+
 const typeDefs = require("./graphql/schema");
 const resolvers = require("./graphql/resolvers");
 

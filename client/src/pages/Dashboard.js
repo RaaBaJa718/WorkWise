@@ -7,7 +7,7 @@ import { FaHome, FaBriefcase, FaProjectDiagram, FaUser, FaSignOutAlt, FaBars } f
 const Dashboard = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     logout();

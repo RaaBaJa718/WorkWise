@@ -7,6 +7,7 @@ import JobListings from "./pages/JobListings";
 import JobApplication from "./pages/JobApplication";
 import Register from "./pages/Register";
 import LandingPage from "./pages/LandingPage"; // <-- Add this import
+import MainLayout from "./pages/MainLayout";
 import "./App.css";
 
 function App() {
@@ -17,10 +18,20 @@ function App() {
           <Route path="/" element={<LandingPage />} /> {/* Add this route */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<ProtectedRoute />}>
-            <Route index element={<Dashboard />} />
-          </Route>
-          <Route path="/jobs" element={<JobListings />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Dashboard />
+              </MainLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/jobs" element={
+            <ProtectedRoute>
+              <MainLayout>
+                <JobListings />
+              </MainLayout>
+            </ProtectedRoute>
+          } />
           <Route path="/apply" element={<JobApplication />} />
         </Routes>
       </Router>

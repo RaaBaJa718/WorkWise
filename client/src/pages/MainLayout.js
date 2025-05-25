@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import "../styles/Dashboard.css";
 import { FaHome, FaBriefcase, FaUser, FaSignOutAlt, FaBars } from "react-icons/fa";
 
-const Dashboard = () => {
+const MainLayout = ({ children }) => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -16,7 +16,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      {/* Sidebar */}
       <div className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
         <div className="sidebar-header">
           <h2>Dashboard</h2>
@@ -46,8 +45,6 @@ const Dashboard = () => {
           <FaSignOutAlt /> Logout
         </button>
       </div>
-
-      {/* Toggle button outside sidebar, top left, only when closed */}
       {!isSidebarOpen && (
         <button
           className="sidebar-toggle outside"
@@ -57,13 +54,9 @@ const Dashboard = () => {
           <FaBars /> Menu
         </button>
       )}
-
-      <div className="main-content">
-        <h1>Welcome to Your Dashboard</h1>
-        {/* Dashboard content here */}
-      </div>
+      <div className="main-content">{children}</div>
     </div>
   );
 };
 
-export default Dashboard;
+export default MainLayout;

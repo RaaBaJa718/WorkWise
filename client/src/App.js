@@ -19,11 +19,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <MainLayout>
-                <Dashboard />
-              </MainLayout>
-            </ProtectedRoute>
+            <MainLayout>
+              <Dashboard />
+            </MainLayout>
           } />
           <Route path="/jobs" element={
             <ProtectedRoute>

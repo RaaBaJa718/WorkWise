@@ -39,7 +39,7 @@ const Login = () => {
       {/* Left Side - Login Form */}
       <div className="login-section">
         <header>
-          <h1>Welcome Back</h1>
+          <h1>Welcome To Work Wise</h1>
           <p>Please sign in to continue</p>
         </header>
         <form className="login-form" onSubmit={handleSubmit}>

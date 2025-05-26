@@ -24,7 +24,16 @@ function LandingPage() {
     <div
       className="landing-container"
       style={{
-        background: 'url("/background.png") no-repeat center center/cover'
+        background: 'url("/background.png") no-repeat center center/cover',
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        color: "white",
+        padding: 0
       }}
     >
       <h1>Find Your Next Opportunity</h1>

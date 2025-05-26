@@ -11,6 +11,13 @@
   z-index: 1000;
 }
 
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .nav-link {
   color: white;
   text-decoration: none;
@@ -27,4 +34,11 @@
   border-radius: 5px;
   border: none;
   width: 200px;
+  margin-right: 8px;
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 }

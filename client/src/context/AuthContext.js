@@ -57,10 +57,10 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (data?.registerUser?.token) {
-        // Save token and set user in context if needed
         localStorage.setItem("token", data.registerUser.token);
-        // Optionally, update your AuthContext here
-        console.log("User registered:", data.registerUser.user);
+        const decodedUser = jwtDecode(data.registerUser.token);
+        setUser(decodedUser); // <-- Set user in context after registration
+        console.log("User registered:", decodedUser);
       } else {
         console.error("Registration failed");
       }

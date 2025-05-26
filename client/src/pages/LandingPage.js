@@ -21,7 +21,12 @@ function LandingPage() {
   if (error) return <p>Error fetching jobs</p>;
 
   return (
-    <div className="landing-container">
+    <div
+      className="landing-container"
+      style={{
+        background: 'url("/background.png") no-repeat center center/cover'
+      }}
+    >
       <h1>Find Your Next Opportunity</h1>
       <input type="text" placeholder="Search jobs..." />
 

@@ -28,6 +28,12 @@
   animation: fadeIn 0.5s ease-in forwards;
 }
 
+.job-card,
+.job-card h3,
+.job-card p {
+  color: #222; /* or any dark color */
+}
+
 @keyframes fadeIn {
   to {
     opacity: 1;
@@ -67,4 +73,23 @@
   display: block;
   font-size: 1rem;
   box-sizing: border-box;
+}
+
+.landing-header {
+  width: 100%;
+  padding: 24px 0 8px 0;
+  background: rgba(0,0,0,0.4); /* subtle overlay, optional */
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.landing-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: bold;
 }

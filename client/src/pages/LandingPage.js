@@ -36,6 +36,9 @@ function LandingPage() {
         padding: 0
       }}
     >
+      <header className="landing-header">
+        <h1>Work Wise</h1>
+      </header>
       <h1>Find Your Next Opportunity</h1>
       <div style={{ marginBottom: "20px" }}>
         <Link to="/login" className="login-button">Sign In</Link>

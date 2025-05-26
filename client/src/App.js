@@ -9,14 +9,21 @@ import Register from "./pages/Register";
 import LandingPage from "./pages/LandingPage"; // <-- Add this import
 import MainLayout from "./components/MainLayout";
 import "./App.css";
+import { useContext } from "react";
+import AuthContext from "./context/AuthContext";
 
 function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <AuthProvider>
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} /> {/* Add this route */}
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={user ? <Navigate to="/dashboard" /> : <Login />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={
             <ProtectedRoute>

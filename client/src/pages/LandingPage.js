@@ -37,7 +37,11 @@ function LandingPage() {
       }}
     >
       <h1>Find Your Next Opportunity</h1>
-      <input type="text" placeholder="Search jobs..." />
+      <div style={{ marginBottom: "20px" }}>
+        <Link to="/login" className="login-button">Sign In</Link>
+        <Link to="/register" className="login-button" style={{ marginLeft: "10px" }}>Register</Link>
+      </div>
+      <input type="text" className="search-input" placeholder="Search jobs..." />
 
       <h2>Featured Jobs</h2>
       <ul className="jobs-list">

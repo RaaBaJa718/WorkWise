@@ -123,3 +123,24 @@
 .sidebar.closed ~ .main-content {
   margin-left: 0;
 }
+
+/* Dashboard Content */
+.dashboard-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 40px;
+}
+
+.tile {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.tile:hover {
+  transform: scale(1.05);
+  transition: 0.3s ease-in-out;
+}

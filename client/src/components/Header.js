@@ -50,7 +50,7 @@ function Header() {
         </form>
       </div>
       <nav className="header-icons">
-        <Link to="/dashboard/home" className="nav-link" title="Home">
+        <Link to="/dashboard" className="nav-link" title="Home">
           <FaHome />
         </Link>
         <Link to="/dashboard/jobs" className="nav-link" title="Jobs">

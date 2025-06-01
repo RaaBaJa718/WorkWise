@@ -30,20 +30,38 @@ function Header() {
         </div>
       </div>
       <div className="header-center">
-        <input
-          type="text"
-          placeholder="Search jobs..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
-        <button className="search-btn" onClick={handleSearch}>Search</button>
+        <form
+          className="header-search"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch();
+          }}
+        >
+          <input
+            type="text"
+            placeholder="Search jobs..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          <button className="search-btn" type="submit">
+            Search
+          </button>
+        </form>
       </div>
       <nav className="header-icons">
-        <Link to="/dashboard/home" className="nav-link" title="Home"><FaHome /></Link>
-        <Link to="/dashboard/jobs" className="nav-link" title="Jobs"><FaBriefcase /></Link>
-        <Link to="/dashboard/profile" className="nav-link" title="Profile"><FaUser /></Link>
-        <Link to="/login" className="nav-link" title="Sign In"><FaSignInAlt /></Link>
+        <Link to="/dashboard/home" className="nav-link" title="Home">
+          <FaHome />
+        </Link>
+        <Link to="/dashboard/jobs" className="nav-link" title="Jobs">
+          <FaBriefcase />
+        </Link>
+        <Link to="/dashboard/profile" className="nav-link" title="Profile">
+          <FaUser />
+        </Link>
+        <Link to="/login" className="nav-link" title="Sign In">
+          <FaSignInAlt />
+        </Link>
       </nav>
     </header>
   );

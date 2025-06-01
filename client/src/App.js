@@ -9,10 +9,12 @@ import JobApplication from "./pages/JobApplication";
 import Register from "./pages/Register";
 import LandingPage from "./pages/LandingPage";
 import MainLayout from "./components/MainLayout";
+import Profile from "./pages/Profile";
+import Applications from "./pages/Applications";
+import SavedJobs from "./pages/SavedJobs";
 import "./App.css";
 
 function AppRoutes() {
-  // Now it's safe to use useContext here, because this is a child of AuthProvider
   const { user } = React.useContext(require("./context/AuthContext").default);
 
   return (
@@ -28,6 +30,34 @@ function AppRoutes() {
           <ProtectedRoute>
             <MainLayout>
               <Dashboard />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/dashboard/profile" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Profile />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/dashboard/applications" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Applications />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/dashboard/saved" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <SavedJobs />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/dashboard/jobs" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <JobListings />
             </MainLayout>
           </ProtectedRoute>
         } />

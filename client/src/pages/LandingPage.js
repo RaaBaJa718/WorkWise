@@ -2,6 +2,7 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import "../styles/LandingPage.css";
+import JobSearch from "../components/JobSearch";
 
 const GET_JOBS = gql`
   query GetJobs {
@@ -42,6 +43,11 @@ function LandingPage() {
           </li>
         ))}
       </ul>
+      <div>
+        <h1>Welcome to WorkWise</h1>
+        <p>Try searching for remote jobs below. For unlimited results, sign in or sign up!</p>
+        <JobSearch isRestricted={true} promptLogin={true} />
+      </div>
     </div>
   );
 }

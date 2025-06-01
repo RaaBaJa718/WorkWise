@@ -12,13 +12,13 @@ function Dashboard({ children }) {
     <div className="dashboard-layout">
       <Header />
       <main className="dashboard-content">
+        <div style={{ gridColumn: "1 / -1", textAlign: "center", marginBottom: "32px" }}>
+          <h1>Welcome to Your Dashboard</h1>
+        </div>
         {children ? (
           children
         ) : (
           <>
-            <div style={{ gridColumn: "1 / -1", textAlign: "center", marginBottom: "32px" }}>
-              <h1>Welcome to Your Dashboard</h1>
-            </div>
             <Link to="/dashboard/applications" className="tile tile-link">
               My Applications
             </Link>

@@ -10,7 +10,7 @@ function Dashboard({ children }) {
 
   return (
     <div className="dashboard-layout">
-      <Header /> {/* Replace sidebar with header */}
+      <Header /> {/* Header now includes menu button and dropdown sidebar */}
       <main className="dashboard-content">
         {children ? (
           children

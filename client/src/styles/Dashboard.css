@@ -42,3 +42,19 @@
   transform: scale(1.05);
   transition: 0.3s ease-in-out;
 }
+
+.tile-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile-link:hover {
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.15);
+  transform: scale(1.05);
+  background: #f0f9ff;
+}

@@ -56,35 +56,38 @@
 .header-search {
   display: flex;
   align-items: center;
-  height: 100%;
-  position: relative;
-  top: 2px; /* tweak this value if you want to nudge it down/up */
+  height: 44px;
+}
+
+.search-input,
+.search-btn {
+  height: 44px;
+  box-sizing: border-box;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  border-width: 1px;
+  font-size: 1.1rem;
+  vertical-align: middle;
+  /* Remove any position/top properties */
 }
 
 .search-input {
-  width: 240px;
-  padding: 10px 14px;
+  padding-left: 14px;
+  padding-right: 14px;
   border-radius: 8px 0 0 8px;
-  border: 1px solid #ccc;
-  font-size: 1.1rem;
-  outline: none;
-  margin: 0;
-  height: 44px;
-  box-sizing: border-box;
+  border-right: none;
 }
 
 .search-btn {
-  padding: 0 24px;
-  border: none;
+  padding-left: 24px;
+  padding-right: 24px;
   border-radius: 0 8px 8px 0;
+  border-left: none;
   background: #007bff;
   color: white;
-  font-size: 1.1rem;
   cursor: pointer;
   transition: background 0.2s;
-  height: 44px;
-  box-sizing: border-box;
-  margin-left: -2px;
 }
 
 .header-icons {

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { useContext } from "react";
 import Header from "../components/Header";
@@ -19,11 +19,16 @@ function Dashboard({ children }) {
             <div style={{ gridColumn: "1 / -1", textAlign: "center", marginBottom: "32px" }}>
               <h1>Welcome to Your Dashboard</h1>
             </div>
-            {/* Your tiles go here */}
-            <div className="tile">My Applications</div>
-            <div className="tile">Saved Jobs</div>
-            <div className="tile">Profile</div>
-            {/* Add more tiles as needed */}
+            <Link to="/dashboard/applications" className="tile tile-link">
+              My Applications
+            </Link>
+            <Link to="/dashboard/saved" className="tile tile-link">
+              Saved Jobs
+            </Link>
+            <Link to="/dashboard/profile" className="tile tile-link">
+              Profile
+            </Link>
+            {/* Add more interactive tiles as needed */}
           </>
         )}
       </main>

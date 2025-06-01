@@ -21,21 +21,7 @@ function LandingPage() {
   if (error) return <p>Error fetching jobs</p>;
 
   return (
-    <div
-      className="landing-container"
-      style={{
-        background: 'url("/background.png") no-repeat center center/cover',
-        height: "100vh",
-        width: "100vw",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        color: "white",
-        padding: 0
-      }}
-    >
+    <div className="landing-container">
       <header className="landing-header">
         <h1>Work Wise</h1>
       </header>

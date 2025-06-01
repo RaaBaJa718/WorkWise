@@ -12,6 +12,10 @@ function Dashboard({ children }) {
     <div className="dashboard-layout">
       <Header /> {/* Header now includes menu button and dropdown sidebar */}
       <main className="dashboard-content">
+        <div className="tile">My Applications</div>
+        <div className="tile">Saved Jobs</div>
+        <div className="tile">Profile</div>
+        {/* Add more tiles as needed */}
         {children ? (
           children
         ) : (

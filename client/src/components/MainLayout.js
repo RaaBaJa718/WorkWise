@@ -54,7 +54,9 @@ const MainLayout = ({ children }) => {
           <FaBars /> Menu
         </button>
       )}
-      <div className="main-content">{children}</div>
+      <div className="main-content">
+        {children}
+      </div>
     </div>
   );
 };

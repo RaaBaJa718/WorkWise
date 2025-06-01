@@ -12,6 +12,7 @@ import MainLayout from "./components/MainLayout";
 import Profile from "./pages/Profile";
 import Applications from "./pages/Applications";
 import SavedJobs from "./pages/SavedJobs";
+import JobSearch from "./components/JobSearch";
 import "./App.css";
 
 function AppRoutes() {
@@ -69,6 +70,13 @@ function AppRoutes() {
           </ProtectedRoute>
         } />
         <Route path="/apply" element={<JobApplication />} />
+        <Route path="/dashboard/search" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <JobSearch isRestricted={false} />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
       </Routes>
     </Router>
   );

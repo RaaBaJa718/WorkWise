@@ -23,7 +23,7 @@ function Header() {
   };
 
   return (
-    <header className="header custom-header">
+    <header className="header">
       <div className="header-avatar">
         <div className="avatar-bubble large-avatar" title={user?.email}>
           {getInitials(user?.name || user?.email)}
